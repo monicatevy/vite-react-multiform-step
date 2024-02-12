@@ -1,16 +1,28 @@
-import { ReactNode } from "react";
+import { ReactNode, CSSProperties } from 'react';
 
 type FormWrapperProps = {
   title: string,
   children: ReactNode;
 };
 
+const titleStyle: CSSProperties = {
+  backgroundColor: '#134472',
+  color: 'white',
+  textAlign: 'center',
+  margin: '16px 0',
+  marginBottom: '2rem',
+  padding: '10px',
+  width: '80%'
+};
+
+
 export function FormWrapper({ title, children }: FormWrapperProps) {
   return (
     <>
-      <h2 style={{ textAlign: "center", margin: 0, marginBottom: "2rem" }}>
-        {title}
-      </h2>
+      <div className="d-flex justify-content-center" style={{ width: '100%' }}>
+        <h6 style={{ ...titleStyle }}>{title}</h6>
+      </div>
+      
       <div style={{
         display: "grid",
         gap: "1rem",

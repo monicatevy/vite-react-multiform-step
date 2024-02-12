@@ -17,6 +17,7 @@ const cardStyle: CSSProperties = {
   display: 'flex',
   alignItems: 'center',
   gap: '10px',
+  marginBottom: '16px'
 };
 
 const InfoCard: React.FC<InfoCardProps> = ({ icon, title, text }) => {
