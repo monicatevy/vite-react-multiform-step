@@ -1,5 +1,9 @@
 import { CSSProperties } from 'react';
 
+export const labelStyle: CSSProperties = {
+  marginBottom: '6px'
+};
+
 export const inputStyle: CSSProperties = {
   width: '100%',
   padding: '0px 22px',
@@ -15,6 +19,6 @@ export const selectStyle: CSSProperties = {
   border: 'none',
 };
 
-export const labelStyle: CSSProperties = {
-  marginBottom: '6px'
+export const checkBoxStyle: CSSProperties = {
+  margin: '0 12px',
 };
