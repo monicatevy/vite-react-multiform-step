@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { FormWrapper } from '../common/FormWrapper';
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 import LabelInput from '../common/LabelInput';
 import CheckBoxGroup, { CheckBoxOption } from '../common/CheckBoxGroup';
+import InfoCard from '../common/InfoCard';
 
 export function VersementForm() {
 
@@ -26,6 +29,12 @@ export function VersementForm() {
   return (
     <FormWrapper title="Vous y êtes presques !">
 
+      <InfoCard 
+        icon={faLightbulb} 
+        title="Bon à savoir !" 
+        text="Le montant de votre versement initial doit être de 10 € minimum" 
+      />
+
       <LabelInput
         label="Montant du premier versement *"
         name="montant"
@@ -41,6 +50,12 @@ export function VersementForm() {
       />
 
       <p>* Réponse obligatoire</p>
+
+      <InfoCard 
+        icon={faInfoCircle} 
+        title="Bon à savoir !" 
+        text="Après la validation de votre livret, vous pourrez effectuer des versements complémentaires poncuels et/ou réguliers" 
+      />
 
     </FormWrapper>
   );

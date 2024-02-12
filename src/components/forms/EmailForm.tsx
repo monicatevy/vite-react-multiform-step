@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { FormWrapper } from "../common/FormWrapper";
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 
 import LabelInput from '../common/LabelInput';
+import InfoCard from '../common/InfoCard';
 
 export function EmailForm() {
 
@@ -11,6 +13,12 @@ export function EmailForm() {
   
   return (
     <FormWrapper title="Faisons connaissance">
+
+      <InfoCard 
+        icon={faLightbulb} 
+        title="Bon à savoir !" 
+        text="Votre numéro de téléphone portable sera utilisé pour la signature électronique de votre souscription." 
+      />
 
       <LabelInput
         label="Quelle est votre adresse e-mail ? *"
