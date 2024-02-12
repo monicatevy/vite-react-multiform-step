@@ -1,11 +1,20 @@
 import { useState } from 'react';
-import { FormWrapper } from "./common/FormWrapper";
-import RadioButtonGroup from './common/RadioButtonGroup';
+import { FormWrapper } from "../common/FormWrapper";
+
+import RadioButtonGroup from '../common/RadioButtonGroup';
+import LabelInput from '../common/LabelInput';
+import ZipCodeInput from '../common/ZipCodeInput';
 
 export function AddressForm() {
 
-  const [clientStatus, setClientStatus] = useState('');
-  const clientStatusOptions = [
+  const [address1, setAddress1] = useState('');
+  const [address2, setAddress2] = useState('');
+  const [address3, setAddress3] = useState('');
+  const [address4, setAddress4] = useState('');
+  const [address5, setAddress5] = useState('');
+  const [hebergementChoice, setHebergementChoice] = useState('');
+
+  const yesNoOptions = [
     { label: 'Oui', value: 'Oui' },
     { label: 'Non', value: 'Non' },
   ];
@@ -14,27 +23,48 @@ export function AddressForm() {
     <FormWrapper title="Faisons connaissance">
       <p>Quelle est votre adresse ? *</p>
 
-      <label>Nom et numéro de rue :</label>
-      <input type="text" />
+      <LabelInput
+        label="Nom et numéro de rue :"
+        name="address1"
+        value={address1}
+        onChange={(e) => setAddress1(e.target.value)}
+      />
 
-      <label>Appartement, étage, escalier :</label>
-      <input type="text" />
+      <LabelInput
+        label="Appartement, étage, escalier :"
+        name="address2"
+        value={address2}
+        onChange={(e) => setAddress2(e.target.value)}
+      />
 
-      <label>Lieu-dit</label>
-      <input type="text" />
+      <LabelInput
+        label="Lieu-dit"
+        name="address3"
+        value={address3}
+        onChange={(e) => setAddress3(e.target.value)}
+      />
 
-      <label>Code postal et Localité :</label>
-      <input type="text" />
-      <input type="text" />
+      <ZipCodeInput
+        label="Code postal et Localité :"
+        zipName="address4"
+        cityName='address5'
+        zipValue={address4}
+        cityValue={address5}
+        onZipChange={(e) => setAddress4(e.target.value)}
+        onCityChange={(e) => setAddress5(e.target.value)}
+      />
 
-      <label>Êtes-vous hébergé(e) par un tiers ? *</label>
       <RadioButtonGroup
+          label="Êtes-vous hébergé(e) par un tiers ? *"
           name="clientStatus"
-          options={clientStatusOptions}
-          selectedValue={clientStatus}
-          onChange={setClientStatus}
+          options={yesNoOptions}
+          selectedValue={hebergementChoice}
+          onChange={setHebergementChoice}
           size="small"
         />
+
+      <p>* Réponse obligatoire</p>
+
     </FormWrapper>
   )
 }

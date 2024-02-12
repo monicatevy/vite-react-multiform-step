@@ -2,9 +2,19 @@ import { CSSProperties } from 'react';
 
 export const inputStyle: CSSProperties = {
   width: '100%',
-  padding: '8px',
-  borderRadius: '4px',
+  padding: '0px 22px',
+  borderRadius: '16px',
   border: '1px solid #ccc',
   boxSizing: 'border-box',
-  height: '40px',
+  height: '48px',
+};
+
+export const selectStyle: CSSProperties = {
+  ...inputStyle,
+  borderRight: '20px solid transparent',
+  border: 'none',
+};
+
+export const labelStyle: CSSProperties = {
+  marginBottom: '6px'
 };

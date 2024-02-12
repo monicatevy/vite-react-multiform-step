@@ -1,27 +1,25 @@
 import React from 'react';
-import { inputStyle } from '../../../styles/commonStyle';
+import { selectStyle, labelStyle } from '../../styles/commonStyle';
 
 interface LabelSelectProps {
   label: string;
-  id: string;
+  name: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   options: { value: string; label: string; }[];
   required?: boolean;
 }
 
-const LabelSelect: React.FC<LabelSelectProps> = ({ label, id, value, onChange, options, required = false }) => {
+const LabelSelect: React.FC<LabelSelectProps> = ({ label, name, value, onChange, options, required = false }) => {
     return (
-      <div style={{ marginBottom: '1rem' }}>
-        <label htmlFor={id} style={{ display: 'block', marginBottom: '0.5rem' }}>
-          {label}
-        </label>
+      <div>
+        <label htmlFor={name} style={{ ...labelStyle }}>{label}</label>
         <select
-          id={id}
+          name={name}
           value={value}
           onChange={onChange}
           required={required}
-          style={{ ...inputStyle }}
+          style={{ ...selectStyle }}
         >
           {options.map(option => (
             <option key={option.value} value={option.value}>

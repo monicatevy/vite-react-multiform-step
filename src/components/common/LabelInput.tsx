@@ -1,23 +1,22 @@
 import React from 'react';
-import { inputStyle } from '../../../styles/commonStyle';
+
+import { inputStyle, labelStyle } from '../../styles/commonStyle';
 
 interface LabelInputProps {
   label: string;
-  id: string;
+  name: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   required?: boolean;
 }
 
-const LabelInput: React.FC<LabelInputProps> = ({ label, id, value, onChange, required = false }) => {
+const LabelInput: React.FC<LabelInputProps> = ({ label, name, value, onChange, required = false }) => {
     return (
-      <div style={{ marginBottom: '1rem' }}>
-        <label htmlFor={id} style={{ display: 'block', marginBottom: '0.5rem' }}>
-          {label}
-        </label>
+      <div>
+        <label htmlFor={name} style={{ ...labelStyle }}>{label}</label>
         <input
           type="text"
-          id={id}
+          name={name}
           value={value}
           onChange={onChange}
           required={required}

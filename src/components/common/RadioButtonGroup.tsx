@@ -1,11 +1,11 @@
 import React from 'react';
+import { labelStyle } from '../../styles/commonStyle';
 
 type ButtonSize = 'small' | 'medium' | 'large';
 
 type Styles = {
   container: React.CSSProperties;
   containerColumn: React.CSSProperties;
-  button: React.CSSProperties;
   selected: React.CSSProperties;
 } & Record<ButtonSize, React.CSSProperties>;
 
@@ -18,27 +18,22 @@ const styles: Styles = {
   containerColumn: {
     flexDirection: 'column',
   },
-  button: {
-    padding: '8px 12px',
-    borderRadius: '4px',
-    margin: '4px',
-    borderWidth: '2px',
-    borderStyle: 'solid',
-    borderColor: '#007BFF',
-    background: '#fff',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s, color 0.3s',
+  small: {
     width: 'auto',
+    borderRadius: '20px',
+    padding: '8px 16px',
+    margin: '0 20px'
   },
-  small: {},
   medium: {
-    padding: '12px 16px',
-    borderRadius: '6px',
+    width: '50%',
+    padding: '10px 0px',
+    borderRadius: '16px',
   },
   large: {
-    padding: '16px 20px',
-    borderRadius: '8px',
     width: '100%',
+    padding: '14px 38px',
+    borderRadius: '20px',
+    textAlign: 'start'
   },
   selected: {
     background: '#007BFF',
@@ -53,6 +48,7 @@ interface Option {
 }
 
 interface RadioButtonGroupProps {
+  label: string;
   options: Option[];
   name: string;
   selectedValue: string;
@@ -61,8 +57,9 @@ interface RadioButtonGroupProps {
 }
 
 const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({
-  options,
+  label,
   name,
+  options,
   selectedValue,
   onChange,
   size,
@@ -70,27 +67,31 @@ const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({
   const isColumn = size === 'large';
 
   return (
-    <div
-      style={{
-        ...styles.container,
-        ...(isColumn ? styles.containerColumn : {}),
-      }}
-    >
-      {options.map((option) => (
-        <button
-          key={option.value}
-          type="button"
-          name={name}
+    <div>
+      <label htmlFor={name} style={{ ...labelStyle }}>{label}</label>
+      <div
+        className='d-flex justify-content-center'
           style={{
-            ...styles.button,
-            ...styles[size],
-            ...(selectedValue === option.value && styles.selected),
+            ...styles.container,
+            ...(isColumn ? styles.containerColumn : {}),
           }}
-          onClick={() => onChange(option.value)}
         >
-          {option.label}
-        </button>
-      ))}
+          {options.map((option) => (
+            <button
+              className='btn btn-outline-primary'
+              key={option.value}
+              type="button"
+              name={name}
+              style={{
+                ...styles[size],
+                ...(selectedValue === option.value && styles.selected),
+              }}
+              onClick={() => onChange(option.value)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
     </div>
   );
 };
