@@ -3,7 +3,7 @@ import { FormWrapper } from '../common/FormWrapper';
 
 import LabelInput from '../common/LabelInput';
 import RadioButtonGroup from '../common/RadioButtonGroup';
-import DateInput from './DateInput';
+import DateInput from '../common/DateInput';
 
 export function UserForm() {
 

@@ -8,12 +8,14 @@ import { JobForm } from "./components/forms/JobForm"
 import { RevenueForm } from "./components/forms/RevenueForm"
 import { PatrimoineForm } from "./components/forms/PatrimoineForm"
 import { VersementForm } from "./components/forms/VersementForm"
+import { AttachmentForm } from "./components/forms/AttachmentForm"
 
 import { useMultistepForm } from "./useMultistepForm"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } = useMultistepForm([
+    /* 
     <UserForm />,
     <EmailForm />,
     <AddressForm />,
@@ -24,10 +26,12 @@ function App() {
     <RevenueForm />,
     <PatrimoineForm />,
     <VersementForm />,
+    */
+    <AttachmentForm />
   ])
   return (
     <div className="row">
-      <div className="col-4"
+      <div className="col-5 ms-5"
       style={{
         position: "relative",
         background: "white",

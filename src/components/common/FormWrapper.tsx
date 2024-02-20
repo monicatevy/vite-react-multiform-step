@@ -27,7 +27,7 @@ export function FormWrapper({ title, children }: FormWrapperProps) {
         display: "grid",
         gap: "1rem",
         gridTemplateColumns: "1fr",
-        maxWidth: "400px",
+        maxWidth: "500px",
         margin: "auto",
       }}>
         {children}
