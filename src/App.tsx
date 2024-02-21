@@ -15,7 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } = useMultistepForm([
-    /* 
+    /*
     <UserForm />,
     <EmailForm />,
     <AddressForm />,

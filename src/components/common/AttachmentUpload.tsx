@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const containerStyle: React.CSSProperties = {
   display: 'flex',
@@ -8,28 +8,22 @@ const containerStyle: React.CSSProperties = {
   alignItems: 'center',
   backgroundColor: 'white',
   border: '1px solid #134472',
-  borderRadius: '16px',
+  borderRadius: '6px',
   marginBottom: '0px',
 };
 
 const labelStyle: React.CSSProperties = {
   fontWeight: 'bold',
   color: '#134472',
-  marginBottom: '4px',
 };
 
 const leftPartStyle: React.CSSProperties = {
   flex: 1,
-  padding: '14px 0px 14px 18px',
-};
-
-const iconStyle: React.CSSProperties = {
-  fontSize: '18px',
+  padding: '8px 0px 8px 14px',
 };
 
 const rightPartStyle: React.CSSProperties = {
-  backgroundColor: '#134472',
-  color: 'white',
+  color: '#134472',
   padding: '10px 18px',
   borderRadius: '0px 16px 16px 0px',
   cursor: 'pointer',
@@ -45,7 +39,7 @@ const hiddenInputStyle: React.CSSProperties = {
 
 const errorStyle: React.CSSProperties = {
   color: 'red',
-  marginTop: '10px'
+  marginTop: '4px',
 };
 
 interface AttachmentUploadProps {
@@ -64,6 +58,7 @@ const AttachmentUpload: React.FC<AttachmentUploadProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [isValid, setIsValid] = useState<boolean>(false);
 
   const handleClick = () => {
     fileInputRef.current?.click();
@@ -73,28 +68,44 @@ const AttachmentUpload: React.FC<AttachmentUploadProps> = ({
     const file = event.target.files ? event.target.files[0] : null;
   
     if (file) {
-      setFileName(file.name);
-      if (file.size > MAX_FILE_SIZE) {
-        const error = "Fichier volumineux. Taille maximale autorisée : 10 KB.";
+      const fileExtension = file.name.split('.').pop()?.toLowerCase();
+      if (fileExtension !== 'pdf') {
+        const error = "Seuls les fichiers PDF sont autorisés.";
+        setFileName(null);
+        setIsValid(false);
         setErrorMessage(error);
         onFileSelected(null);
-      } else {
-        setErrorMessage(null);
-        onFileSelected(file);
+        return;
       }
+
+      if (file.size > MAX_FILE_SIZE) {
+        const error = "Fichier volumineux. Taille maximale autorisée : 10 KB.";
+        setFileName(null);
+        setIsValid(false);
+        setErrorMessage(error);
+        onFileSelected(null);
+        return;
+      }
+
+      setFileName(file.name);
+      setIsValid(true);
+      setErrorMessage(null);
+      onFileSelected(file);
     }
   };
 
   return (
     <div style={containerStyle}>
       <div style={leftPartStyle}>
-        <div style={labelStyle}>{label}</div>
-        {description && <small>{description}</small>}
-        {fileName && <div style={{ marginTop: '10px' }}>Fichier : {fileName}</div>}
+        <div style={labelStyle}>{isValid ? fileName : label}</div>
+        {isValid ? null : (description && <small>{description}</small>)}
         {errorMessage && <div style={errorStyle}>{errorMessage}</div>}
       </div>
       <div style={rightPartStyle} onClick={handleClick}>
-        <FontAwesomeIcon icon={faPlus} style={iconStyle}/>
+        <FontAwesomeIcon
+          icon={isValid ? faCheck : (errorMessage ? faTimes : faDownload)}
+          style={{ color: isValid ? 'green' : (errorMessage ? 'red' : '#134472') }}
+        />
       </div>
       <input
         type="file"
